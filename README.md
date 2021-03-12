@@ -4,9 +4,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
-The first step is installation, to install type
+The first step after cloning / downloading the repository is installation, to install type
 
-### `yarn` or `npm install`
+### `yarn` or `npm install` depending on whether you have npm / yarn installed on your system
 
 In the project directory, you can run:
 
