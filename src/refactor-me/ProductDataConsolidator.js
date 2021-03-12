@@ -1,131 +1,38 @@
-﻿import LawnmowerRepository from "../do-not-refactor/LawnmowerRepository"
-import PhoneCaseRepository from "../do-not-refactor/PhoneCaseRepository"
-import TShirtRepository from "../do-not-refactor/TShirtRepository"
-function ProductDataConsolidator() {
+﻿import { LawnMower, PhoneCase, TShirt } from "../constants/ProductTypes";
+import { NZDFactor } from "../constants/CurrencyConversion";
+import LawnmowerRepository from "../do-not-refactor/LawnmowerRepository";
+import PhoneCaseRepository from "../do-not-refactor/PhoneCaseRepository";
+import TShirtRepository from "../do-not-refactor/TShirtRepository";
+
+function ProductDataConsolidator(currencyFactor) {
+  console.log(currencyFactor);
   //return product data from repository in a specified format
   const l = new LawnmowerRepository().getAll();
   const p = new PhoneCaseRepository().getAll();
   const t = new TShirtRepository().getAll();
-  const products = [];
-  l.map((product) => {
-	  products.push({
-		id: lo[i].id,
-		name: l[i].name,
-		price: l[i].price.toFixed(2),
-		type: "Lawnmower", 
-	  }
-  })
+  const products = getProductDetailArray(l, LawnMower, currencyFactor).concat(
+    getProductDetailArray(p, PhoneCase, currencyFactor),
+    getProductDetailArray(t, TShirt, currencyFactor)
+  );
+  console.log(products);
   return products;
 }
-ProductDataConsolidator.get = function () {
-  var l = new LawnmowerRepository().getAll();
-  var p = new PhoneCaseRepository().getAll();
-  var t = new TShirtRepository().getAll();
 
-  var products = [];
+const getProductDetailArray = (
+  productArray = [],
+  productType = "",
+  currency = NZDFactor
+) => {
+  const productDetail = productArray.map((product) => {
+    let rObj = {};
+    rObj.id = product.id;
+    rObj.name = product.name;
+    rObj.price = (product.price * currency).toFixed(2);
+    rObj.type = productType;
+    return rObj;
+  });
 
-  for (var i = 0; i < l.length; i++) {
-    products.push({
-      id: l[i].id,
-      name: l[i].name,
-      price: l[i].price.toFixed(2),
-      type: "Lawnmower",
-    });
-  }
-
-  for (var i = 0; i < p.length; i++) {
-    products.push({
-      id: p[i].id,
-      name: p[i].name,
-      price: p[i].price.toFixed(2),
-      type: "Phone Case",
-    });
-  }
-
-  for (var i = 0; i < t.length; i++) {
-    products.push({
-      id: t[i].id,
-      name: t[i].name,
-      price: t[i].price.toFixed(2),
-      type: "T-Shirt",
-    });
-  }
-
-  return products;
-};
-
-ProductDataConsolidator.getInUSDollars = function () {
-  var l = new LawnmowerRepository().getAll();
-  var p = new PhoneCaseRepository().getAll();
-  var t = new TShirtRepository().getAll();
-
-  var products = [];
-
-  for (var i = 0; i < l.length; i++) {
-    products.push({
-      id: l[i].id,
-      name: l[i].name,
-      price: (l[i].price * 0.76).toFixed(2),
-      type: "Lawnmower",
-    });
-  }
-
-  for (var i = 0; i < p.length; i++) {
-    products.push({
-      id: p[i].id,
-      name: p[i].name,
-      price: (p[i].price * 0.76).toFixed(2),
-      type: "Phone Case",
-    });
-  }
-
-  for (var i = 0; i < t.length; i++) {
-    products.push({
-      id: t[i].id,
-      name: t[i].name,
-      price: (t[i].price * 0.76).toFixed(2),
-      type: "T-Shirt",
-    });
-  }
-
-  return products;
-};
-
-ProductDataConsolidator.getInEuros = function () {
-  var l = new LawnmowerRepository().getAll();
-  var p = new PhoneCaseRepository().getAll();
-  var t = new TShirtRepository().getAll();
-
-  var products = [];
-
-  for (var i = 0; i < l.length; i++) {
-    products.push({
-      id: l[i].id,
-      name: l[i].name,
-      price: (l[i].price * 0.67).toFixed(2),
-      type: "Lawnmower",
-    });
-  }
-
-  for (var i = 0; i < p.length; i++) {
-    products.push({
-      id: p[i].id,
-      name: p[i].name,
-      price: (p[i].price * 0.67).toFixed(2),
-      type: "Phone Case",
-    });
-  }
-
-  for (var i = 0; i < t.length; i++) {
-    products.push({
-      id: t[i].id,
-      name: t[i].name,
-      price: (t[i].price * 0.67).toFixed(2),
-      type: "T-Shirt",
-    });
-  }
-
-  return products;
+  return productDetail;
 };
 
 export default ProductDataConsolidator;

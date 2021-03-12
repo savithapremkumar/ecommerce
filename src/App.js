@@ -1,23 +1,15 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import ProductDataRenderer from "../src/refactor-me/ProductDataRenderer";
+import { USD, NZD, Euro } from "./constants/CurrencyTypes";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <header>Product List</header>
+      <ProductDataRenderer currency={NZD}></ProductDataRenderer>
+      <ProductDataRenderer currency={USD}></ProductDataRenderer>
+      <ProductDataRenderer currency={Euro}></ProductDataRenderer>
     </div>
   );
 }
