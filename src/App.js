@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import ProductDataRenderer from "../src/refactor-me/ProductDataRenderer";
 import { USD, NZD, Euro } from "./constants/CurrencyTypes";
